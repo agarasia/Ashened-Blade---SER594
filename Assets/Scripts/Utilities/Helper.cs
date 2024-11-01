@@ -6,8 +6,11 @@ namespace SA
 {
     public class Helper : MonoBehaviour
     {
-        [Range(0, 1)]
+        [Range(-1, 1)]
         public float vertical;
+
+        [Range(-1, 1)]
+        public float horizontal;
         public bool twoHanded;
 
         public string[] oh_attacks;
@@ -16,6 +19,7 @@ namespace SA
         public bool interacting;
         public bool playAnim;
         public bool enableRootMotion;
+        public bool lockOn;
 
         Animator anim;
         // Start is called before the first frame update
@@ -34,6 +38,12 @@ namespace SA
 
             if (enableRootMotion) return;
 
+            if (!lockOn)
+            {
+                horizontal = 0;
+                vertical = Mathf.Clamp01(vertical);
+            }
+
             if (useItem)
             {
                 anim.Play("use_item");
@@ -45,7 +55,9 @@ namespace SA
                 playAnim = false;
                 vertical = Mathf.Clamp(vertical, 0, 0.5f);
             }
+
             anim.SetBool("two_Handed", twoHanded);
+            anim.SetBool("lockon", lockOn);
 
             if (playAnim)
             {
@@ -68,6 +80,7 @@ namespace SA
                 playAnim = false;
             }
             anim.SetFloat("vertical", vertical);
+            anim.SetFloat("horizontal", horizontal);
         }
     }
 }
