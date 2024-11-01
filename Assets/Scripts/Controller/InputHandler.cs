@@ -58,18 +58,18 @@ public class InputHandler : MonoBehaviour
         b_input = Input.GetButton("B");
         a_input = Input.GetButton("A");
         x_input = Input.GetButton("X");
-        y_input = Input.GetButtonUp("Y");
-        rt_input=Input.GetButton("RT");
-        rt_axis=Input.GetAxis("RT");
-        if(rt_axis!=0)
-            rt_input=true;
+        y_input = Input.GetButton("Y");
+        rt_input = Input.GetButton("RT");
+        rt_axis = Input.GetAxis("RT");
+        if (rt_axis != 0)
+            rt_input = true;
 
-        lt_input=Input.GetButton("LT");
-        lt_axis=Input.GetAxis("LT");
-        if(lt_axis!=0)
-            lt_input=true;
-        rb_input=Input.GetButton("RB");
-        lb_input=Input.GetButton("LB");
+        lt_input = Input.GetButton("LT");
+        lt_axis = Input.GetAxis("LT");
+        if (lt_axis != 0)
+            lt_input = true;
+        rb_input = Input.GetButton("RB");
+        lb_input = Input.GetButton("LB");
     }
 
     void UpdateStates()
@@ -92,14 +92,15 @@ public class InputHandler : MonoBehaviour
             states.run = false;
         }
 
-       
-        states.rt=rt_input;
-        states.lt=lt_input;
-        states.rb=rb_input;
-        states.lb=lb_input;
 
-        if(y_input){
-            states.isTwoHanded =!states.isTwoHanded;
+        states.rt = rt_input;
+        states.lt = lt_input;
+        states.rb = rb_input;
+        states.lb = lb_input;
+
+        if (y_input)
+        {
+            states.isTwoHanded = !states.isTwoHanded;
             states.HandleTwoHanded();
         }
     }
