@@ -36,6 +36,8 @@ public class StateManager : MonoBehaviour
 
     [Header("Other")]
     public EnemyTarget lockOnTarget;
+    public Transform lockOnTransform; 
+    public AnimationCurve roll_curve;
 
     [HideInInspector]
     public Animator anim;
@@ -115,8 +117,9 @@ public class StateManager : MonoBehaviour
             return;
 
 
-        a_hook.rm_multi = 1;
-        HandleRolls():
+        //a_hook.rm_multi = 1;
+        a_hook.CloseRoll();
+        HandleRolls();
     
 
 
@@ -135,8 +138,12 @@ public class StateManager : MonoBehaviour
         if (run)
             lockOn = false;
 
-            Vector3 targetDir = (lockOn == false)? moveDir
-                : lockOnTarget.transform.position - transform.position;
+            Vector3 targetDir = (lockOn == false)?
+                 moveDir
+                : (lockOnTransform != null)?
+                    lockOnTransform.transform.position - transform.position 
+                    : 
+                    moveDir;
 
             targetDir.y = 0;
             if (targetDir == Vector3.zero)
@@ -224,12 +231,18 @@ public class StateManager : MonoBehaviour
         if (v != 0)
         {
             if(moveDir == Vector3.zero)
-               moveDir == transform.forward;
+               moveDir = transform.forward;
             Quaternion targetRot = Quaternion.LookRotation(moveDir);
             transform.rotation = targetRot;
+            a_hook.InitForRoll();
+            a_hook.rm_multi = rollSpeed;
+        }
+        else
+        {
+            a_hook.rm_multi = 1.3f;
         }
 
-        a_hook.rm_multi = rollSpeed;
+       
 
         anim.SetFloat("vertical", v);
         anim.SetFloat("horizontal", h);
@@ -248,7 +261,7 @@ public class StateManager : MonoBehaviour
 
 
 
-    void HandleLockOnAnimations()
+    void HandleLockOnAnimations(Vector3 moveDir)
     {
         Vector3 relativeDir = transform.InverseTransformDirection(moveDir);
         float h = relativeDir.x;

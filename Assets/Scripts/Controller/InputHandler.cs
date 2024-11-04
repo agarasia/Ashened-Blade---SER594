@@ -35,7 +35,7 @@ public class InputHandler : MonoBehaviour
         states.Init();
 
         camManager = CameraManager.singleton;
-        camManager.Init(this.transform);
+        camManager.Init(states);
     }
 
     // Update is called once per frame
@@ -121,7 +121,8 @@ public class InputHandler : MonoBehaviour
             if(states.lockOnTarget == null)
                 states.lockOn = false;
 
-            camManager.lockonTarget = states.lockOnTarget.transform;
+            camManager.lockonTarget = states.lockOnTarget;
+            states.lockOnTransform = camManager.lockonTransform;
             camManager.lockon = states.lockOn;
         }
     }
