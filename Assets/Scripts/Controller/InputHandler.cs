@@ -21,6 +21,9 @@ public class InputHandler : MonoBehaviour
     float lt_axis;
     bool lt_input;
 
+    bool leftAxis_down;
+    bool rightAxis_down;
+
     StateManager states;
     CameraManager camManager;
 
@@ -32,7 +35,7 @@ public class InputHandler : MonoBehaviour
         states.Init();
 
         camManager = CameraManager.singleton;
-        camManager.Init(this.transform);
+        camManager.Init(states);
     }
 
     // Update is called once per frame
@@ -58,7 +61,7 @@ public class InputHandler : MonoBehaviour
         b_input = Input.GetButton("B");
         a_input = Input.GetButton("A");
         x_input = Input.GetButton("X");
-        y_input = Input.GetButton("Y");
+        y_input = Input.GetButtonUp("Y");
         rt_input = Input.GetButton("RT");
         rt_axis = Input.GetAxis("RT");
         if (rt_axis != 0)
@@ -70,6 +73,8 @@ public class InputHandler : MonoBehaviour
             lt_input = true;
         rb_input = Input.GetButton("RB");
         lb_input = Input.GetButton("LB");
+
+        rightAxis_down = Input.GetButtonUp("L");
     }
 
     void UpdateStates()
@@ -83,13 +88,18 @@ public class InputHandler : MonoBehaviour
         float m = Mathf.Abs(horizontal) + Mathf.Abs(vertical);
         states.moveAmount = Mathf.Clamp01(m);
 
+
+        states.rollInput = b_input;
+
+
+
         if (b_input)
         {
-            states.run = (states.moveAmount > 0);
+            // states.run = (states.moveAmount > 0);
         }
         else
         {
-            states.run = false;
+            // states.run = false;
         }
 
 
@@ -102,6 +112,18 @@ public class InputHandler : MonoBehaviour
         {
             states.isTwoHanded = !states.isTwoHanded;
             states.HandleTwoHanded();
+        }
+
+
+        if (rightAxis_down)
+        {
+            states.lockOn = !states.lockOn;
+            if(states.lockOnTarget == null)
+                states.lockOn = false;
+
+            camManager.lockonTarget = states.lockOnTarget;
+            states.lockOnTransform = camManager.lockonTransform;
+            camManager.lockon = states.lockOn;
         }
     }
 }
