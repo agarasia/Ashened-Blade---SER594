@@ -118,7 +118,7 @@ public class InputHandler : MonoBehaviour
         if (rightAxis_down)
         {
             states.lockOn = !states.lockOn;
-            if(states.lockOnTarget == null)
+            if (states.lockOnTarget == null)
                 states.lockOn = false;
 
             camManager.lockonTarget = states.lockOnTarget;
