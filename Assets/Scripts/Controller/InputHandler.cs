@@ -122,7 +122,7 @@ public class InputHandler : MonoBehaviour
                 states.lockOn = false;
 
             camManager.lockonTarget = states.lockOnTarget;
-            states.lockOnTransform = camManager.lockonTransform;
+            states.lockOnTransform = camManager.lockOnTransform;
             camManager.lockon = states.lockOn;
         }
     }

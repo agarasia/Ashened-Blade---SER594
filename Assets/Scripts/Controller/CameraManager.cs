@@ -12,7 +12,7 @@ public class CameraManager : MonoBehaviour
 
     public Transform target;
     public EnemyTarget lockonTarget;
-    public Transform lockonTransform;
+    public Transform lockOnTransform;
 
     [HideInInspector]
     public Transform pivot;
@@ -54,27 +54,27 @@ public class CameraManager : MonoBehaviour
 
         if (lockonTarget != null)
         {
-            if(lockonTransform == null)
+            if (lockOnTransform == null)
             {
-                lockonTransform = lockonTarget.GetTarget();
-                states.lockOnTransform = lockonTransform;
+                lockOnTransform = lockonTarget.GetTarget();
+                states.lockOnTransform = lockOnTransform;
             }
 
-            if(Mathf.Abs(c_h) > 0.6f)
+            if (Mathf.Abs(c_h) > 0.6f)
             {
-                if(!usedRightAxis)
+                if (!usedRightAxis)
                 {
-                    lockonTransform = lockonTarget.GetTarget((c_h > 0));
-                    states.lockOnTransform = lockonTransform;
+                    lockOnTransform = lockonTarget.GetTarget((c_h > 0));
+                    states.lockOnTransform = lockOnTransform;
                     usedRightAxis = true;
                 }
             }
         }
 
 
-        if(usedRightAxis)
+        if (usedRightAxis)
         {
-            if(Mathf.Abs(c_h) < 0.6f)
+            if (Mathf.Abs(c_h) < 0.6f)
             {
                 usedRightAxis = false;
             }
@@ -117,14 +117,14 @@ public class CameraManager : MonoBehaviour
         tiltAngle -= smoothY * targetSpeed;
         tiltAngle = Mathf.Clamp(tiltAngle, minAngle, maxAngle);
         pivot.localRotation = Quaternion.Euler(tiltAngle, 0, 0);
-    
+
 
 
 
         if (lockon && lockonTarget != null)
         {
-            
-            Vector3 targetDir = lockonTransform.position - transform.position;
+
+            Vector3 targetDir = lockOnTransform.position - transform.position;
             targetDir.Normalize();
             //targetDir.y = 0;
 
@@ -139,7 +139,7 @@ public class CameraManager : MonoBehaviour
         lookAngle += smoothX * targetSpeed;
         transform.rotation = Quaternion.Euler(0, lookAngle, 0);
 
-        
+
     }
     public static CameraManager singleton;
     void Awake()

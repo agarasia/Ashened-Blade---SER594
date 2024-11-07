@@ -173,7 +173,7 @@ MonoBehaviour:
   contollerSpeed: 7
   target: {fileID: 1791269803}
   lockonTarget: {fileID: 0}
-  lockonTransform: {fileID: 0}
+  lockOnTransform: {fileID: 0}
   pivot: {fileID: 0}
   camTrans: {fileID: 0}
   minAngle: -35
@@ -294,7 +294,7 @@ Transform:
   m_GameObject: {fileID: 173328893}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2, z: 0}
+  m_LocalPosition: {x: -19.85, y: 2, z: -0.46}
   m_LocalScale: {x: 4, y: 4, z: 4}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -319,7 +319,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   index: 0
   targets: []
-  h_bones: 
+  h_bones: 000000000300000004000000
 --- !u!1001 &397307629
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1054,11 +1054,6 @@ MonoBehaviour:
   index: 0
   targets: []
   h_bones: 
---- !u!4 &1734985900 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: b502d825b9e744752a84268af280958f, type: 3}
-  m_PrefabInstance: {fileID: 1593496324}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1791269800
 GameObject:
   m_ObjectHideFlags: 0
@@ -1138,7 +1133,7 @@ Transform:
   m_GameObject: {fileID: 1791269800}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 4, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1183,7 +1178,7 @@ MonoBehaviour:
   runSpeed: 5.5
   rotateSpeed: 9
   toGround: 0.5
-  rollSpeed: 10
+  rollSpeed: 15
   onGround: 1
   run: 0
   lockOn: 1
@@ -1191,7 +1186,7 @@ MonoBehaviour:
   canMove: 0
   isTwoHanded: 0
   lockOnTarget: {fileID: 1734985898}
-  lockOnTransform: {fileID: 1734985900}
+  lockOnTransform: {fileID: 0}
   roll_curve:
     serializedVersion: 2
     m_Curve:

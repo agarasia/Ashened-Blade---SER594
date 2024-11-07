@@ -17,8 +17,8 @@ namespace SA
 
         public void Init(StateManager st)
         {
-            states=st;
-            anim=st.anim;
+            states = st;
+            anim = st.anim;
         }
 
         public void InitForRoll()
@@ -27,46 +27,46 @@ namespace SA
             roll_t = 0;
         }
 
-        public void  CloseRoll()
+        public void CloseRoll()
         {
             if (rolling == false)
                 return;
-            
+
             rm_multi = 1;
             roll_t = 0;
-            rolling =false;
+            rolling = false;
         }
 
         void onAnimatorMove()
         {
-            if(states.canMove)
+            if (states.canMove)
                 return;
 
-            states.rigid.drag=0;
+            states.rigid.drag = 0;
 
-            if(rm_multi == 0)
+            if (rm_multi == 0)
                 rm_multi = 1;
-            
-            if (rolling ==false)
+
+            if (rolling == false)
             {
-                Vector3 delta= anim.deltaPosition;
-                delta.y=0;
-                Vector3 v=(delta* rm_multi)/states.delta;
-                states.rigid.velocity=v;
+                Vector3 delta = anim.deltaPosition;
+                delta.y = 0;
+                Vector3 v = (delta * rm_multi) / states.delta;
+                states.rigid.velocity = v;
             }
             else
             {
                 roll_t += states.delta / 0.6f;
 
-                if(roll_t > 1)
+                if (roll_t > 1)
                 {
                     roll_t = 1;
                 }
                 float zValue = states.roll_curve.Evaluate(roll_t);
                 Vector3 v1 = Vector3.forward * zValue;
                 Vector3 relative = transform.TransformDirection(v1);
-                Vector3 v2 =(relative* rm_multi); 
-                states.rigid.velocity =v2;
+                Vector3 v2 = (relative * rm_multi);
+                states.rigid.velocity = v2;
             }
         }
 
