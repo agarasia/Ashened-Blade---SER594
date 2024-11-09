@@ -47,6 +47,9 @@ public class StateManager : MonoBehaviour
     public AnimatorHook a_hook;
 
     [HideInInspector]
+    public ActionManager actionManager; 
+
+    [HideInInspector]
     public float delta;
     [HideInInspector]
     public LayerMask ignoreLayers;
@@ -61,6 +64,9 @@ public class StateManager : MonoBehaviour
         rigid.angularDrag = 999;
         rigid.drag = 4;
         rigid.constraints = RigidbodyConstraints.FreezeRotationX | RigidbodyConstraints.FreezeRotationZ;
+
+        actionManager = GetComponent<ActionManager>();
+        actionManager.Init();
 
         a_hook = activeModel.AddComponent<AnimatorHook>();
         a_hook.Init(this);

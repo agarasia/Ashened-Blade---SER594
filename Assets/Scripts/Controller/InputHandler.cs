@@ -24,6 +24,10 @@ public class InputHandler : MonoBehaviour
     bool leftAxis_down;
     bool rightAxis_down;
 
+    float b_timer;
+    float rt_timer;
+    float lt_timer;
+
     StateManager states;
     CameraManager camManager;
 
@@ -52,7 +56,7 @@ public class InputHandler : MonoBehaviour
     {
         delta = Time.deltaTime;
         states.Tick(delta);
-
+        ResetInputNStates();
     }
     void GetInput()
     {
@@ -75,9 +79,13 @@ public class InputHandler : MonoBehaviour
         lb_input = Input.GetButton("LB");
 
         rightAxis_down = Input.GetButtonUp("L");
+
+        if(b_input)
+            b_timer+=delta;
     }
 
     void UpdateStates()
+
     {
         states.horizontal = horizontal;
         states.vertical = vertical;
@@ -93,14 +101,13 @@ public class InputHandler : MonoBehaviour
 
 
 
-        if (b_input)
+        if (b_input && b_timer>0.5f)
         {
-            // states.run = (states.moveAmount > 0);
+            states.run = (states.moveAmount > 0);
         }
-        else
-        {
-            // states.run = false;
-        }
+
+        if(b_input == false && b_timer>0 && b_timer<0.5f)
+            states.rollInput=true;
 
 
         states.rt = rt_input;
@@ -125,5 +132,15 @@ public class InputHandler : MonoBehaviour
             states.lockOnTransform = camManager.lockOnTransform;
             camManager.lockon = states.lockOn;
         }
+    }
+
+    void ResetInputNStates(){
+         if(b_input==false)
+            b_timer=0;
+        if(states.rollInput)
+            states.rollInput=false;
+
+        if(states.run)
+            states.run=false;
     }
 }
