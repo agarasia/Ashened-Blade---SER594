@@ -16,6 +16,7 @@ public class StateManager : MonoBehaviour
     public Vector3 moveDir;
     public bool rt, rb, lt, lb;
     public bool rollInput;
+    public bool itemInput;
 
 
     [Header("Stats")]
@@ -33,6 +34,7 @@ public class StateManager : MonoBehaviour
     public bool inAction;
     public bool canMove;
     public bool isTwoHanded;
+    public bool usingItem;
 
     [Header("Other")]
     public EnemyTarget lockOnTarget;
@@ -107,7 +109,8 @@ public class StateManager : MonoBehaviour
     public void FixedTick(float d)
     {
         delta = d;
-
+        usingItem=anim.GetBool("interacting");
+        DetectItemAction();
         DetectAction();
 
         if (inAction)
@@ -175,10 +178,26 @@ public class StateManager : MonoBehaviour
             HandleLockOnAnimations(moveDir);
     }
 
+    public void DetectItemAction()
+    {
+        if(canMove==false || usingItem)
+            return;
+
+        if(itemInput==false)
+            return;
+
+        ItemAction slot= actionManager.consumableItem;
+        string targetAnim=slot.targetAnim;
+        if (string.IsNullOrEmpty(targetAnim))
+            return;
+        
+        usingItem=true;
+        anim.CrossFade(targetAnim, 0.2f);
+    }
     public void DetectAction()
     {
 
-        if (canMove == false)
+        if (canMove == false || usingItem)
             return;
 
         if (rt == false && rb == false && lt == false && lb == false)
@@ -212,7 +231,7 @@ public class StateManager : MonoBehaviour
 
     void HandleRolls()
     {
-        if (!rollInput)
+        if (!rollInput || usingItem)
             return;
 
         float v = vertical;

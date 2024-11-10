@@ -7,6 +7,8 @@ namespace SA
     public class ActionManager : MonoBehaviour
     {
         public List<Action> actionSlots = new List<Action>();
+        
+        public ItemAction consumableItem;
         StateManager states;
         
         public void Init(StateManager st)
@@ -93,5 +95,12 @@ namespace SA
     public class Action{
         public ActionInput input;
         public string targetAnim;
+    }
+
+    [System.Serializable]
+    public class ItemAction
+    {
+        public string targetAnim;
+        public string item_id;
     }
 }
