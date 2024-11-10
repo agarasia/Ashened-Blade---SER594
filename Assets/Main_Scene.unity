@@ -514,6 +514,7 @@ GameObject:
   - component: {fileID: 1013578851}
   - component: {fileID: 1013578849}
   - component: {fileID: 1013578854}
+  - component: {fileID: 1013578855}
   m_Layer: 0
   m_Name: Controller
   m_TagString: Untagged
@@ -538,15 +539,34 @@ MonoBehaviour:
   horizontal: 0
   moveAmount: 0
   moveDir: {x: 0, y: 0, z: 0}
+  rt: 0
+  rb: 0
+  lt: 0
+  lb: 0
+  rollInput: 0
   moveSpeed: 3.5
   runSpeed: 5.5
   rotateSpeed: 9
   toGround: 0.5
+  rollSpeed: 1
   onGround: 0
   run: 0
   lockOn: 0
+  inAction: 0
+  canMove: 0
+  isTwoHanded: 0
+  lockOnTarget: {fileID: 0}
+  lockOnTransform: {fileID: 0}
+  roll_curve:
+    serializedVersion: 2
+    m_Curve: []
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   anim: {fileID: 0}
   rigid: {fileID: 0}
+  a_hook: {fileID: 0}
+  actionManager: {fileID: 0}
   delta: 0
   ignoreLayers:
     serializedVersion: 2
@@ -629,6 +649,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d4775aa5bc709244937a55b60abef7a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1013578855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013578848}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 128127ca5eb1b4dfda16bd880e697f48, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  actionSlots:
+  - input: 0
+    targetAnim: oh_attack_1
+  - input: 1
+    targetAnim: 
+  - input: 2
+    targetAnim: oh_attack_3
+  - input: 3
+    targetAnim: 
 --- !u!1 &1503733242
 GameObject:
   m_ObjectHideFlags: 0
@@ -757,6 +798,8 @@ MonoBehaviour:
   mouseSpeed: 2
   contollerSpeed: 5
   target: {fileID: 0}
+  lockonTarget: {fileID: 0}
+  lockOnTransform: {fileID: 0}
   pivot: {fileID: 0}
   camTrans: {fileID: 0}
   minAngle: -35
