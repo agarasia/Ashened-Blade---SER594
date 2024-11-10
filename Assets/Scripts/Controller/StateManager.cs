@@ -110,8 +110,11 @@ public class StateManager : MonoBehaviour
     {
         delta = d;
         usingItem=anim.GetBool("interacting");
+
         DetectItemAction();
         DetectAction();
+
+        inventoryManager.curWeapon.weaponModel.SetActive(!usingItem);
 
         if (inAction)
         {
@@ -147,6 +150,11 @@ public class StateManager : MonoBehaviour
 
 
         float targetSpeed = moveSpeed;
+        if(usingItem)
+        {
+            run=false;
+            moveAmount=Mathf.Clamp(moveAmount, 0, .45f);
+        }
         if (run)
             targetSpeed = runSpeed;
 
@@ -190,9 +198,11 @@ public class StateManager : MonoBehaviour
         string targetAnim=slot.targetAnim;
         if (string.IsNullOrEmpty(targetAnim))
             return;
+
+        //inventoryManager.curWeapon.weaponModel.SetActive(false);
         
         usingItem=true;
-        anim.CrossFade(targetAnim, 0.2f);
+        anim.Play(targetAnim);
     }
     public void DetectAction()
     {

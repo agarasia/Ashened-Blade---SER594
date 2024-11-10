@@ -17,5 +17,6 @@ namespace SA
     {
         public List<Action> actions;
         public List<Action> two_handedActions;
+        public GameObject weaponModel;
     }
 }
