@@ -7,8 +7,9 @@ namespace SA
     public class InventoryManager : MonoBehaviour
     {
         public Weapon curWeapon;
-        public void Init(){
-
+        public void Init()
+        {
+            curWeapon.w_hook.CloseDamageColliders();
         }
     }
 
@@ -18,5 +19,6 @@ namespace SA
         public List<Action> actions;
         public List<Action> two_handedActions;
         public GameObject weaponModel;
+        public WeaponHook w_hook;
     }
 }
