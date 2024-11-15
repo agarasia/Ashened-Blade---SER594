@@ -20,7 +20,7 @@ namespace SA
         public void UpdateActionsOneHanded()
         {
             EmptyAllSlots();
-            Weapon w= states.inventoryManager.curWeapon;
+            Weapon w= states.inventoryManager.rightHandWeapon;
             for(int i=0;i<w.actions.Count;i++)
             {
                 Action a= GetAction(w.actions[i].input);
@@ -31,7 +31,7 @@ namespace SA
         public void UpdateActionsTwoHanded()
         {
             EmptyAllSlots();
-            Weapon w= states.inventoryManager.curWeapon;
+            Weapon w= states.inventoryManager.rightHandWeapon;
             for(int i=0;i<w.two_handedActions.Count;i++)
             {
                 Action a= GetAction(w.two_handedActions[i].input);

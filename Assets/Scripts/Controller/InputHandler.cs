@@ -124,7 +124,7 @@ public class InputHandler : MonoBehaviour
             states.HandleTwoHanded();
         }
 
-        if(states.lockOnTarget != null)
+        /*if(states.lockOnTarget != null)
         {
 
             if (states.lockOnTarget.eStates.enabled == false)
@@ -135,7 +135,7 @@ public class InputHandler : MonoBehaviour
                     camManager.lockon = false;
                     camManager.lockonTarget = false;
                 }
-        }
+        }*/
 
         if (rightAxis_down)
         {

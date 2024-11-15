@@ -6,10 +6,21 @@ namespace SA
 {
     public class InventoryManager : MonoBehaviour
     {
-        public Weapon curWeapon;
+        public Weapon rightHandWeapon;
+        public Weapon leftHandWeapon;
+
         public void Init()
         {
-            curWeapon.w_hook.CloseDamageColliders();
+           CloseAllDamageColliders(); 
+        }
+
+        public void CloseAllDamageColliders()
+        {
+            if (rightHandWeapon.w_hook != null)
+                rightHandWeapon.w_hook.CloseDamageColliders();
+
+            if (leftHandWeapon.w_hook != null)
+                leftHandWeapon.w_hook.CloseDamageColliders();
         }
     }
 
@@ -18,6 +29,7 @@ namespace SA
     {
         public List<Action> actions;
         public List<Action> two_handedActions;
+        public bool LeftHandMirror;
         public GameObject weaponModel;
         public WeaponHook w_hook;
     }

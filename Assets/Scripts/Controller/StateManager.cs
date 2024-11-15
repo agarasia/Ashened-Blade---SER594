@@ -116,7 +116,7 @@ public class StateManager : MonoBehaviour
         DetectItemAction();
         DetectAction();
 
-        inventoryManager.curWeapon.weaponModel.SetActive(!usingItem);
+        inventoryManager.rightHandWeapon.weaponModel.SetActive(!usingItem);
 
         if (inAction)
         {
