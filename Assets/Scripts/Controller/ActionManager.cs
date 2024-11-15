@@ -20,7 +20,35 @@ namespace SA
         public void UpdateActionsOneHanded()
         {
             EmptyAllSlots();
+            if(states.inventoryManager.hasLeftHandWeapon)
+            {
+                UpdateActionsWithLeftHand();
+                return;
+            }
             Weapon w= states.inventoryManager.rightHandWeapon;
+            for(int i=0;i<w.actions.Count;i++)
+            {
+                Action a= GetAction(w.actions[i].input);
+                a.targetAnim=w.actions[i].targetAnim;
+            }
+        }
+
+        public void UpdateActionsWithLeftHand()
+        {
+            Weapon r_w= states.inventoryManager.rightHandWeapon;
+            Weapon l_w= states.inventoryManager.leftHandWeapon;
+
+
+            Action rb = GetAction(ActionInput.rb);
+            Action rt = GetAction(ActionInput.rt);
+            rb.targetAnim = r_w.GetAction(r_w.actions,ActionInput.rb).targetAnim;
+            rt.targetAnim = r_w.GetAction(r_w.actions,ActionInput.rt).targetAnim;
+
+            Action lb = GetAction(ActionInput.lb);
+            Action lt = GetAction(ActionInput.lt);
+            lb.targetAnim = l_w.GetAction(l_w.actions,ActionInput.lb).targetAnim;
+            lt.targetAnim = l_w.GetAction(l_w.actions,ActionInput.lt).targetAnim;
+
             for(int i=0;i<w.actions.Count;i++)
             {
                 Action a= GetAction(w.actions[i].input);

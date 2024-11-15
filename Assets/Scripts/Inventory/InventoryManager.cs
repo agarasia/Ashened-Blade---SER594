@@ -7,6 +7,7 @@ namespace SA
     public class InventoryManager : MonoBehaviour
     {
         public Weapon rightHandWeapon;
+        public bool hasLeftHandWeapon = true;
         public Weapon leftHandWeapon;
 
         public void Init()
@@ -32,5 +33,18 @@ namespace SA
         public bool LeftHandMirror;
         public GameObject weaponModel;
         public WeaponHook w_hook;
+
+        public Action GetAction(List<Action> l , ActionInput inp)
+        {
+            for(int i=0; i< l.count; i++)
+            {
+                if(l[i].input == inp)
+                {
+                    return l[i];
+                }
+            }
+
+            return null;
+        }
     }
 }
