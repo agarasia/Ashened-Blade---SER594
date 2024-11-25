@@ -60,7 +60,7 @@ namespace SoulsLike
             lb.targetAnimation = w_lb.targetAnimation;
             lb.type = w_lb.type;
 
-            Action w_lt = l_w.GetAction(l_w.actions, ActionInput.rt)
+            Action w_lt = l_w.GetAction(l_w.actions, ActionInput.rt);
             lt.targetAnimation = w_lt.targetAnimation;
             lt.type = w_lb.type;
 
@@ -81,7 +81,7 @@ namespace SoulsLike
             {
                 Action a = GetAction(w.twoHandedActions[i].input);
                 a.targetAnimation = w.twoHandedActions[i].targetAnimation;
-                a.type = w.twoHandedActions[i].type
+                a.type = w.twoHandedActions[i].type;
             }
         }
 

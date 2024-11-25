@@ -115,8 +115,8 @@ namespace SoulsLike
             DetectItemAction();            
             inventoryManager.rightHandWeapon.weaponModel.SetActive(!usingItem);
 
-            anim.SetBool("blocking", isBlocking);
-            anim.SetBool("isLeft", isLeftHand);
+            animator.SetBool("blocking", isBlocking);
+            animator.SetBool("isLeft", isLeftHand);
 
             if (inAction)
             {
@@ -226,7 +226,7 @@ namespace SoulsLike
 
             switch (slot.type)
             {
-                case ActionType.atack:
+                case ActionType.attack:
                     AttackAction(slot);
                     break;
                 case ActionType.block:
@@ -260,7 +260,7 @@ namespace SoulsLike
             //rigidBody.velocity = Vector3.zero;
         }
 
-        void BlockAction(Ation slot)
+        void BlockAction(Action slot)
         {
             isBlocking = true;
             isLeftHand = slot.mirror;
